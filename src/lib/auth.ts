@@ -16,11 +16,11 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
     }),
     EmailProvider({
-      from: "noreply@splitwise-clone.app",
+      from: process.env.EMAIL_FROM || "onboarding@resend.dev",
       sendVerificationRequest: async ({ identifier: email, url }) => {
         try {
           await resend.emails.send({
-            from: "Splitwise Clone <noreply@splitwise-clone.app>",
+            from: process.env.EMAIL_FROM || "Splitwise Clone <onboarding@resend.dev>",
             to: email,
             subject: "Sign in to Splitwise Clone",
             html: `
